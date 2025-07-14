@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  # Postgres
+  db:
+    image: postgres:latest
+    container_name: lir
+    environment:
+      POSTGRES_DB: drupaldb
+      POSTGRES_USER: drupaluser
+      POSTGRES_PASSWORD: drupalpassword
+    ports:
+      - 5432:5432
+  
+  # Drupal
+  cms:
+    image: drupal:latest
+    restart: always
+    ports:
+      - 8080:80
+    depends_on:
+      - db
